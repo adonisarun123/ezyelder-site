@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, Clock, ChevronRight } from 'lucide-react';
+import { User, Clock, ChevronRight } from 'lucide-react';
 
 const BlogPage: React.FC = () => {
   const blogPosts = [
