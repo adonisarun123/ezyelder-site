@@ -1,13 +1,95 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles for accessibility */
+@layer base {
+  html {
+    font-size: 18px; /* Larger base font size for better readability */
+  }
+  
+  body {
+    @apply antialiased;
+  }
+  
+  /* High contrast mode styles */
+  .high-contrast {
+    @apply bg-black text-white;
+  }
+  
+  .high-contrast * {
+    @apply border-white;
+  }
+  
+  .high-contrast .bg-lavender {
+    @apply bg-purple-800;
+  }
+  
+  .high-contrast .bg-sage {
+    @apply bg-green-800;
+  }
+  
+  .high-contrast .bg-sky {
+    @apply bg-blue-800;
+  }
+  
+  .high-contrast .bg-warm-beige {
+    @apply bg-yellow-800;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Custom component classes */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-dark-lavender text-white rounded-full font-semibold text-lg 
+           hover:bg-purple-700 transition-colors duration-200 
+           focus:outline-none focus:ring-4 focus:ring-lavender;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-sage text-white rounded-full font-semibold text-lg 
+           hover:bg-dark-sage transition-colors duration-200 
+           focus:outline-none focus:ring-4 focus:ring-green-300;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300;
+  }
+  
+  .section-padding {
+    @apply px-6 py-12 md:px-12 lg:px-24;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  @apply outline-none ring-4 ring-dark-lavender ring-opacity-50;
+}
+
+/* Image zoom on hover */
+.image-zoom {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-lavender;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-lavender rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-purple-700;
 }
