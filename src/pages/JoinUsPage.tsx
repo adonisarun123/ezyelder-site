@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Users, Clock, Award, Send, User, Phone, Mail, CheckCircle, Star } from 'lucide-react';
+import { memberService, volunteerService } from '../lib/supabase';
+import { emailService } from '../lib/emailService';
 
 const JoinUsPage: React.FC = () => {
   const [activeForm, setActiveForm] = useState<'member' | 'volunteer'>('member');
@@ -36,7 +38,8 @@ const JoinUsPage: React.FC = () => {
     backgroundCheck: false
   });
 
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const memberInterests = [
     'Health & Wellness', 'Technology Training', 'Arts & Crafts', 'Music & Dance',
@@ -105,32 +108,112 @@ const JoinUsPage: React.FC = () => {
     });
   };
 
-  const handleMemberSubmit = (e: React.FormEvent) => {
+  const handleMemberSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitStatus('success');
-    setTimeout(() => {
-      setSubmitStatus('idle');
-      // Reset form
-      setMemberForm({
-        firstName: '', lastName: '', email: '', phone: '', dateOfBirth: '',
-        address: '', city: '', emergencyContact: '', emergencyPhone: '',
-        medicalConditions: '', interests: [], membershipType: '', hearAboutUs: ''
-      });
-    }, 3000);
+    setSubmitStatus('loading');
+    setErrorMessage('');
+
+    try {
+      // Prepare data for Supabase (convert camelCase to snake_case)
+      const memberData = {
+        first_name: memberForm.firstName,
+        last_name: memberForm.lastName,
+        email: memberForm.email,
+        phone: memberForm.phone,
+        date_of_birth: memberForm.dateOfBirth,
+        address: memberForm.address,
+        city: memberForm.city,
+        emergency_contact: memberForm.emergencyContact,
+        emergency_phone: memberForm.emergencyPhone,
+        medical_conditions: memberForm.medicalConditions || undefined,
+        interests: memberForm.interests,
+        membership_type: memberForm.membershipType,
+        hear_about_us: memberForm.hearAboutUs || undefined
+      };
+
+      // Save to Supabase
+      await memberService.createMember(memberData);
+      
+      // Send email notification
+      await emailService.notifyMemberApplication(memberData);
+      
+      setSubmitStatus('success');
+      
+      // Reset form after success
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setMemberForm({
+          firstName: '', lastName: '', email: '', phone: '', dateOfBirth: '',
+          address: '', city: '', emergencyContact: '', emergencyPhone: '',
+          medicalConditions: '', interests: [], membershipType: '', hearAboutUs: ''
+        });
+      }, 5000);
+      
+    } catch (error: any) {
+      console.error('Error submitting member application:', error);
+      setSubmitStatus('error');
+      setErrorMessage(error.message || 'Failed to submit application. Please try again.');
+      
+      // Clear error after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setErrorMessage('');
+      }, 5000);
+    }
   };
 
-  const handleVolunteerSubmit = (e: React.FormEvent) => {
+  const handleVolunteerSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitStatus('success');
-    setTimeout(() => {
-      setSubmitStatus('idle');
-      // Reset form
-      setVolunteerForm({
-        firstName: '', lastName: '', email: '', phone: '', address: '', city: '',
-        occupation: '', skills: [], availability: [], experience: '',
-        motivation: '', preferredArea: '', backgroundCheck: false
-      });
-    }, 3000);
+    setSubmitStatus('loading');
+    setErrorMessage('');
+
+    try {
+      // Prepare data for Supabase (convert camelCase to snake_case)
+      const volunteerData = {
+        first_name: volunteerForm.firstName,
+        last_name: volunteerForm.lastName,
+        email: volunteerForm.email,
+        phone: volunteerForm.phone,
+        address: volunteerForm.address,
+        city: volunteerForm.city,
+        occupation: volunteerForm.occupation || undefined,
+        skills: volunteerForm.skills,
+        availability: volunteerForm.availability,
+        experience: volunteerForm.experience || undefined,
+        motivation: volunteerForm.motivation,
+        preferred_area: volunteerForm.preferredArea,
+        background_check: volunteerForm.backgroundCheck
+      };
+
+      // Save to Supabase
+      await volunteerService.createVolunteer(volunteerData);
+      
+      // Send email notification
+      await emailService.notifyVolunteerApplication(volunteerData);
+      
+      setSubmitStatus('success');
+      
+      // Reset form after success
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setVolunteerForm({
+          firstName: '', lastName: '', email: '', phone: '', address: '', city: '',
+          occupation: '', skills: [], availability: [], experience: '',
+          motivation: '', preferredArea: '', backgroundCheck: false
+        });
+      }, 5000);
+      
+    } catch (error: any) {
+      console.error('Error submitting volunteer application:', error);
+      setSubmitStatus('error');
+      setErrorMessage(error.message || 'Failed to submit application. Please try again.');
+      
+      // Clear error after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setErrorMessage('');
+      }, 5000);
+    }
   };
 
   return (
@@ -456,28 +539,59 @@ const JoinUsPage: React.FC = () => {
                   </select>
                 </div>
 
-                {submitStatus === 'success' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-green-100 text-green-700 p-4 rounded-lg border border-green-300"
-                  >
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="w-5 h-5" />
-                      <span className="font-semibold">Application submitted successfully!</span>
-                    </div>
-                    <p className="mt-1">Welcome to the EzyElders family! We'll contact you within 48 hours to complete your membership.</p>
-                  </motion.div>
-                )}
+                                 {submitStatus === 'loading' && (
+                   <motion.div
+                     initial={{ opacity: 0, y: -10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     className="bg-blue-100 text-blue-700 p-4 rounded-lg border border-blue-300"
+                   >
+                     <div className="flex items-center gap-2">
+                       <div className="animate-spin w-5 h-5 border-2 border-blue-700 border-t-transparent rounded-full"></div>
+                       <span className="font-semibold">Submitting your application...</span>
+                     </div>
+                   </motion.div>
+                 )}
 
-                <button
-                  type="submit"
-                  className="w-full px-6 py-4 bg-pink-600 text-white rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                  disabled={submitStatus === 'success'}
-                >
-                  <Send className="w-5 h-5" />
-                  Submit Membership Application
-                </button>
+                 {submitStatus === 'success' && (
+                   <motion.div
+                     initial={{ opacity: 0, y: -10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     className="bg-green-100 text-green-700 p-4 rounded-lg border border-green-300"
+                   >
+                     <div className="flex items-center gap-2">
+                       <CheckCircle className="w-5 h-5" />
+                       <span className="font-semibold">Application submitted successfully!</span>
+                     </div>
+                     <p className="mt-1">Welcome to the EzyElders family! We'll contact you within 48 hours to complete your membership.</p>
+                   </motion.div>
+                 )}
+
+                 {submitStatus === 'error' && (
+                   <motion.div
+                     initial={{ opacity: 0, y: -10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     className="bg-red-100 text-red-700 p-4 rounded-lg border border-red-300"
+                   >
+                     <div className="flex items-center gap-2">
+                       <div className="w-5 h-5 text-red-700">⚠️</div>
+                       <span className="font-semibold">Application failed!</span>
+                     </div>
+                     <p className="mt-1">{errorMessage}</p>
+                   </motion.div>
+                 )}
+
+                                 <button
+                   type="submit"
+                   className="w-full px-6 py-4 bg-pink-600 text-white rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                   disabled={submitStatus === 'loading' || submitStatus === 'success'}
+                 >
+                   {submitStatus === 'loading' ? (
+                     <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
+                   ) : (
+                     <Send className="w-5 h-5" />
+                   )}
+                   {submitStatus === 'loading' ? 'Submitting...' : 'Submit Membership Application'}
+                 </button>
               </form>
             </motion.div>
           </div>
@@ -745,28 +859,59 @@ const JoinUsPage: React.FC = () => {
                   </label>
                 </div>
 
-                {submitStatus === 'success' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-green-100 text-green-700 p-4 rounded-lg border border-green-300"
-                  >
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="w-5 h-5" />
-                      <span className="font-semibold">Volunteer application submitted successfully!</span>
-                    </div>
-                    <p className="mt-1">Thank you for your interest in volunteering! We'll contact you within 48 hours to discuss next steps.</p>
-                  </motion.div>
-                )}
+                                 {submitStatus === 'loading' && (
+                   <motion.div
+                     initial={{ opacity: 0, y: -10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     className="bg-blue-100 text-blue-700 p-4 rounded-lg border border-blue-300"
+                   >
+                     <div className="flex items-center gap-2">
+                       <div className="animate-spin w-5 h-5 border-2 border-blue-700 border-t-transparent rounded-full"></div>
+                       <span className="font-semibold">Submitting your application...</span>
+                     </div>
+                   </motion.div>
+                 )}
 
-                <button
-                  type="submit"
-                  className="w-full px-6 py-4 bg-cyan-500 text-white rounded-lg font-semibold text-lg hover:bg-cyan-600 transition-colors flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                  disabled={submitStatus === 'success'}
-                >
-                  <Send className="w-5 h-5" />
-                  Submit Volunteer Application
-                </button>
+                 {submitStatus === 'success' && (
+                   <motion.div
+                     initial={{ opacity: 0, y: -10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     className="bg-green-100 text-green-700 p-4 rounded-lg border border-green-300"
+                   >
+                     <div className="flex items-center gap-2">
+                       <CheckCircle className="w-5 h-5" />
+                       <span className="font-semibold">Volunteer application submitted successfully!</span>
+                     </div>
+                     <p className="mt-1">Thank you for your interest in volunteering! We'll contact you within 48 hours to discuss next steps.</p>
+                   </motion.div>
+                 )}
+
+                 {submitStatus === 'error' && (
+                   <motion.div
+                     initial={{ opacity: 0, y: -10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     className="bg-red-100 text-red-700 p-4 rounded-lg border border-red-300"
+                   >
+                     <div className="flex items-center gap-2">
+                       <div className="w-5 h-5 text-red-700">⚠️</div>
+                       <span className="font-semibold">Application failed!</span>
+                     </div>
+                     <p className="mt-1">{errorMessage}</p>
+                   </motion.div>
+                 )}
+
+                                 <button
+                   type="submit"
+                   className="w-full px-6 py-4 bg-cyan-500 text-white rounded-lg font-semibold text-lg hover:bg-cyan-600 transition-colors flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                   disabled={submitStatus === 'loading' || submitStatus === 'success'}
+                 >
+                   {submitStatus === 'loading' ? (
+                     <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
+                   ) : (
+                     <Send className="w-5 h-5" />
+                   )}
+                   {submitStatus === 'loading' ? 'Submitting...' : 'Submit Volunteer Application'}
+                 </button>
               </form>
             </motion.div>
           </div>

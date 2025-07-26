@@ -1,9 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, Clock, ChevronRight, Calendar } from 'lucide-react';
+import { User, Clock, ChevronRight, Calendar, Send, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { newsletterService } from '../lib/supabase';
+import { emailService } from '../lib/emailService';
 
 const BlogPage: React.FC = () => {
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitStatus('loading');
+    setErrorMessage('');
+
+    try {
+      // Save to Supabase
+      const subscriptionData = { email: newsletterEmail, source: 'blog' as const };
+      await newsletterService.createSubscription(subscriptionData);
+      
+      // Send email notification
+      await emailService.notifyNewsletterSubscription(subscriptionData);
+      
+      setSubmitStatus('success');
+      
+      // Reset form after success
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setNewsletterEmail('');
+      }, 5000);
+      
+    } catch (error: any) {
+      console.error('Error subscribing to newsletter:', error);
+      setSubmitStatus('error');
+      setErrorMessage(error.message || 'Failed to subscribe. Please try again.');
+      
+      // Clear error after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setErrorMessage('');
+      }, 5000);
+    }
+  };
   const blogPosts = [
     {
       id: 1,
@@ -203,16 +242,60 @@ const BlogPage: React.FC = () => {
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Get the latest health tips, technology guides, and lifestyle advice delivered to your inbox
             </p>
-            <div className="max-w-md mx-auto flex gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
-              />
-              <button className="bg-white text-pink-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                Subscribe
-              </button>
-            </div>
+            
+            <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto">
+              <div className="flex gap-4 mb-4">
+                <input
+                  type="email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  placeholder="Enter your email address"
+                  required
+                  className="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white"
+                  disabled={submitStatus === 'loading'}
+                />
+                <button 
+                  type="submit"
+                  className="bg-white text-pink-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  disabled={submitStatus === 'loading' || submitStatus === 'success'}
+                >
+                  {submitStatus === 'loading' ? (
+                    <div className="animate-spin w-5 h-5 border-2 border-pink-600 border-t-transparent rounded-full"></div>
+                  ) : (
+                    <Send className="w-5 h-5" />
+                  )}
+                  {submitStatus === 'loading' ? 'Subscribing...' : 'Subscribe'}
+                </button>
+              </div>
+
+              {submitStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white/20 text-white p-3 rounded-lg backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-2 justify-center">
+                    <CheckCircle className="w-5 h-5" />
+                    <span className="font-semibold">Successfully subscribed!</span>
+                  </div>
+                  <p className="text-center text-sm mt-1">You'll receive our latest posts in your inbox.</p>
+                </motion.div>
+              )}
+
+              {submitStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-red-100 text-red-700 p-3 rounded-lg border border-red-300"
+                >
+                  <div className="flex items-center gap-2 justify-center">
+                    <div className="w-5 h-5 text-red-700">⚠️</div>
+                    <span className="font-semibold">Subscription failed!</span>
+                  </div>
+                  <p className="text-center text-sm mt-1">{errorMessage}</p>
+                </motion.div>
+              )}
+            </form>
           </motion.div>
         </div>
       </section>

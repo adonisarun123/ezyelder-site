@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Heart, Users, CheckCircle, Star } from 'lucide-react';
+import { contactService } from '../lib/supabase';
+import { emailService } from '../lib/emailService';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +13,8 @@ const ContactPage: React.FC = () => {
     message: ''
   });
 
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -20,20 +23,43 @@ const ContactPage: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setSubmitStatus('success');
-    setTimeout(() => {
-      setSubmitStatus('idle');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
-    }, 3000);
+    setSubmitStatus('loading');
+    setErrorMessage('');
+
+    try {
+      // Save to Supabase
+      await contactService.createContactInquiry(formData);
+      
+      // Send email notification
+      await emailService.notifyContactInquiry(formData);
+      
+      setSubmitStatus('success');
+      
+      // Reset form after success
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+      }, 5000);
+      
+    } catch (error: any) {
+      console.error('Error submitting contact form:', error);
+      setSubmitStatus('error');
+      setErrorMessage(error.message || 'Failed to submit your message. Please try again.');
+      
+      // Clear error after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setErrorMessage('');
+      }, 5000);
+    }
   };
 
   const contactInfo = [
@@ -312,6 +338,19 @@ const ContactPage: React.FC = () => {
                   />
                 </div>
 
+                {submitStatus === 'loading' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-blue-100 text-blue-700 p-4 rounded-lg border border-blue-300"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="animate-spin w-5 h-5 border-2 border-blue-700 border-t-transparent rounded-full"></div>
+                      <span className="font-semibold">Sending your message...</span>
+                    </div>
+                  </motion.div>
+                )}
+
                 {submitStatus === 'success' && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
@@ -326,13 +365,31 @@ const ContactPage: React.FC = () => {
                   </motion.div>
                 )}
 
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-100 text-red-700 p-4 rounded-lg border border-red-300"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="w-5 h-5 text-red-700">⚠️</div>
+                      <span className="font-semibold">Message failed to send!</span>
+                    </div>
+                    <p className="mt-1">{errorMessage}</p>
+                  </motion.div>
+                )}
+
                 <button
                   type="submit"
                   className="w-full px-6 py-4 bg-pink-600 text-white rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                  disabled={submitStatus === 'success'}
+                  disabled={submitStatus === 'loading' || submitStatus === 'success'}
                 >
-                  <Send className="w-5 h-5" />
-                  Send Message
+                  {submitStatus === 'loading' ? (
+                    <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
+                  ) : (
+                    <Send className="w-5 h-5" />
+                  )}
+                  {submitStatus === 'loading' ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </motion.div>
