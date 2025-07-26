@@ -23,7 +23,7 @@ export const useSEO = ({
   const fullUrl = url.startsWith('http') ? url : `https://ezyelders.com${url}`;
 
   useEffect(() => {
-    // Update document title
+    // Update document title immediately (for react-snap)
     document.title = fullTitle;
 
     // Function to update or create meta tag
@@ -79,6 +79,23 @@ export const useSEO = ({
     }
 
   }, [fullTitle, description, keywords, image, fullUrl, type, author]);
+
+  // Also set meta tags immediately for react-snap (not just in useEffect)
+  if (typeof document !== 'undefined') {
+    const setMetaImmediate = (name: string, content: string, property?: string) => {
+      const selector = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
+      let element = document.querySelector(selector) as HTMLMetaElement;
+      
+      if (element) {
+        element.content = content;
+      }
+    };
+
+    // Set critical meta tags immediately
+    setMetaImmediate('description', description);
+    setMetaImmediate('', fullTitle, 'og:title');
+    setMetaImmediate('', description, 'og:description');
+  }
 
   return null;
 }; 
