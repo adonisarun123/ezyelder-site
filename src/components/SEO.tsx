@@ -15,7 +15,7 @@ const SEO: React.FC<SEOProps> = ({
   title,
   description,
   keywords = 'senior care, elderly services, senior citizens, senior community, elder care, senior wellness, senior activities, senior support',
-  image = '/logo192.png',
+  image = '/ezyelders-logo.png',
   url = 'https://ezyelders.com',
   type = 'website',
   author = 'EzyElders'

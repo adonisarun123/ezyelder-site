@@ -9,10 +9,12 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-pink-600 to-cyan-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">EE</span>
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/ezyelders-logo.png" 
+                alt="EzyElders Logo" 
+                className="w-12 h-12 object-contain"
+              />
               <span className="text-xl font-bold">EzyElders</span>
             </div>
             <p className="text-gray-300 mb-4">

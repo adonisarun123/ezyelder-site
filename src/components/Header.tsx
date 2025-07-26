@@ -35,10 +35,12 @@ const Header: React.FC = () => {
       <nav className="px-4 py-3 md:px-8 lg:px-12">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-pink-600 to-cyan-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">EE</span>
-            </div>
+          <Link to="/" className="flex items-center space-x-3">
+            <img 
+              src="/ezyelders-logo.png" 
+              alt="EzyElders Logo" 
+              className="w-12 h-12 object-contain"
+            />
             <span className="text-xl font-bold text-gray-800">EzyElders</span>
           </Link>
 
