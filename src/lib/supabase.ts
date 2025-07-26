@@ -3,12 +3,18 @@ import { createClient } from '@supabase/supabase-js';
 // Supabase configuration
 const supabaseUrl = 'https://rdcfkqmvwqihegkexztv.supabase.co';
 
-// TODO: Replace with your actual Supabase anon key
-// You can find this in your Supabase project dashboard under Settings > API
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY || 'your_anon_key_here';
+// Get Supabase anon key from environment variables
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+
+// Validate API key configuration
+if (!supabaseAnonKey || supabaseAnonKey === 'your_anon_key_here') {
+  console.error('🚨 SUPABASE SETUP REQUIRED: Please add your Supabase API key to environment variables');
+  console.error('Add REACT_APP_SUPABASE_ANON_KEY=your_actual_key to .env.local file');
+  console.error('Get your API key from: https://rdcfkqmvwqihegkexztv.supabase.co/project/settings/api');
+}
 
 // Create Supabase client
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey || 'demo_key');
 
 // Database table definitions (types)
 export interface Member {
@@ -74,14 +80,29 @@ export interface NewsletterSubscription {
 export const memberService = {
   // Create a new member
   async createMember(memberData: Omit<Member, 'id' | 'created_at' | 'updated_at'>) {
-    const { data, error } = await supabase
-      .from('members')
-      .insert([memberData])
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+    try {
+      const { data, error } = await supabase
+        .from('members')
+        .insert([memberData])
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Member creation error:', error);
+        const enhancedError = new Error(getDetailedError(error));
+        (enhancedError as any).originalError = error;
+        throw enhancedError;
+      }
+      
+      // Add request ID to the response
+      const requestId = generateRequestId();
+      console.log(`✅ Member created successfully - Request ID: ${requestId}`, data);
+      
+      return { ...data, requestId };
+    } catch (error: any) {
+      console.error('Member service error:', error);
+      throw error;
+    }
   },
 
   // Get all members
@@ -135,14 +156,29 @@ export const memberService = {
 export const volunteerService = {
   // Create a new volunteer
   async createVolunteer(volunteerData: Omit<Volunteer, 'id' | 'created_at' | 'updated_at'>) {
-    const { data, error } = await supabase
-      .from('volunteers')
-      .insert([volunteerData])
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+    try {
+      const { data, error } = await supabase
+        .from('volunteers')
+        .insert([volunteerData])
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Volunteer creation error:', error);
+        const enhancedError = new Error(getDetailedError(error));
+        (enhancedError as any).originalError = error;
+        throw enhancedError;
+      }
+      
+      // Add request ID to the response
+      const requestId = generateRequestId();
+      console.log(`✅ Volunteer created successfully - Request ID: ${requestId}`, data);
+      
+      return { ...data, requestId };
+    } catch (error: any) {
+      console.error('Volunteer service error:', error);
+      throw error;
+    }
   },
 
   // Get all volunteers
@@ -196,14 +232,29 @@ export const volunteerService = {
 export const contactService = {
   // Create a new contact inquiry
   async createContactInquiry(inquiryData: Omit<ContactInquiry, 'id' | 'created_at' | 'updated_at'>) {
-    const { data, error } = await supabase
-      .from('contact_inquiries')
-      .insert([inquiryData])
-      .select()
-      .single();
-    
-    if (error) throw error;
-    return data;
+    try {
+      const { data, error } = await supabase
+        .from('contact_inquiries')
+        .insert([inquiryData])
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Contact inquiry creation error:', error);
+        const enhancedError = new Error(getDetailedError(error));
+        (enhancedError as any).originalError = error;
+        throw enhancedError;
+      }
+      
+      // Add request ID to the response
+      const requestId = generateRequestId();
+      console.log(`✅ Contact inquiry created successfully - Request ID: ${requestId}`, data);
+      
+      return { ...data, requestId };
+    } catch (error: any) {
+      console.error('Contact service error:', error);
+      throw error;
+    }
   },
 
   // Get all contact inquiries
@@ -257,20 +308,29 @@ export const contactService = {
 export const newsletterService = {
   // Create a new newsletter subscription
   async createSubscription(subscriptionData: Omit<NewsletterSubscription, 'id' | 'subscribed_at' | 'unsubscribed_at'>) {
-    const { data, error } = await supabase
-      .from('newsletter_subscriptions')
-      .insert([subscriptionData])
-      .select()
-      .single();
-    
-    if (error) {
-      // Handle duplicate email error gracefully
-      if (error.code === '23505') {
-        throw new Error('This email is already subscribed to our newsletter.');
+    try {
+      const { data, error } = await supabase
+        .from('newsletter_subscriptions')
+        .insert([subscriptionData])
+        .select()
+        .single();
+      
+      if (error) {
+        console.error('Newsletter subscription error:', error);
+        const enhancedError = new Error(getDetailedError(error));
+        (enhancedError as any).originalError = error;
+        throw enhancedError;
       }
+      
+      // Add request ID to the response
+      const requestId = generateRequestId();
+      console.log(`✅ Newsletter subscription created successfully - Request ID: ${requestId}`, data);
+      
+      return { ...data, requestId };
+    } catch (error: any) {
+      console.error('Newsletter service error:', error);
       throw error;
     }
-    return data;
   },
 
   // Get all newsletter subscriptions
@@ -329,20 +389,76 @@ export const newsletterService = {
   }
 };
 
+// Utility functions
+export const generateRequestId = (): string => {
+  const timestamp = Date.now().toString(36);
+  const randomStr = Math.random().toString(36).substring(2, 8);
+  return `EE-${timestamp}-${randomStr}`.toUpperCase();
+};
+
+export const getDetailedError = (error: any): string => {
+  // Check for common Supabase errors
+  if (error.message?.includes('Invalid API key')) {
+    return 'Configuration Error: Invalid Supabase API key. Please check your environment variables.';
+  }
+  
+  if (error.message?.includes('relation') && error.message?.includes('does not exist')) {
+    return 'Database Error: Required tables not found. Please run the database schema setup.';
+  }
+  
+  if (error.message?.includes('network') || error.message?.includes('fetch')) {
+    return 'Network Error: Unable to connect to the database. Please check your internet connection.';
+  }
+  
+  if (error.code === '23505') {
+    return 'This email is already registered in our system.';
+  }
+  
+  if (error.code === '42P01') {
+    return 'Database tables not found. Please contact support with error code: DB-SETUP-REQUIRED';
+  }
+  
+  // Generic error
+  return error.message || 'An unexpected error occurred. Please try again.';
+};
+
 // General utility functions
 export const supabaseUtils = {
-  // Test connection
+  // Test connection and configuration
   async testConnection() {
     try {
+      // First check if API key is configured
+      if (!supabaseAnonKey || supabaseAnonKey === 'demo_key') {
+        return { 
+          success: false, 
+          message: 'Setup Required: Supabase API key not configured. Check console for setup instructions.',
+          needsSetup: true 
+        };
+      }
+
+      // Test actual connection
       const { error } = await supabase
         .from('members')
         .select('count')
         .limit(1);
       
-      if (error) throw error;
+      if (error) {
+        const detailedMessage = getDetailedError(error);
+        return { 
+          success: false, 
+          message: detailedMessage,
+          originalError: error.message 
+        };
+      }
+      
       return { success: true, message: 'Connected to Supabase successfully!' };
-    } catch (error) {
-      return { success: false, message: `Connection failed: ${error}` };
+    } catch (error: any) {
+      const detailedMessage = getDetailedError(error);
+      return { 
+        success: false, 
+        message: detailedMessage,
+        originalError: error.message 
+      };
     }
   },
 
@@ -353,5 +469,22 @@ export const supabaseUtils = {
     
     if (error) throw error;
     return data;
+  },
+
+  // Check if all required tables exist
+  async checkDatabaseSetup() {
+    const requiredTables = ['members', 'volunteers', 'contact_inquiries', 'newsletter_subscriptions'];
+    const results = [];
+    
+    for (const table of requiredTables) {
+      try {
+        const { error } = await supabase.from(table).select('count').limit(1);
+        results.push({ table, exists: !error, error: error?.message });
+      } catch (error: any) {
+        results.push({ table, exists: false, error: error.message });
+      }
+    }
+    
+    return results;
   }
 }; 

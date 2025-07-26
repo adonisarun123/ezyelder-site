@@ -15,6 +15,7 @@ const ContactPage: React.FC = () => {
 
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [requestId, setRequestId] = useState<string>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -30,7 +31,10 @@ const ContactPage: React.FC = () => {
 
     try {
       // Save to Supabase
-      await contactService.createContactInquiry(formData);
+      const result = await contactService.createContactInquiry(formData);
+      
+      // Set request ID from response
+      setRequestId(result.requestId);
       
       // Send email notification
       await emailService.notifyContactInquiry(formData);
@@ -40,6 +44,7 @@ const ContactPage: React.FC = () => {
       // Reset form after success
       setTimeout(() => {
         setSubmitStatus('idle');
+        setRequestId('');
         setFormData({
           name: '',
           email: '',
@@ -58,6 +63,7 @@ const ContactPage: React.FC = () => {
       setTimeout(() => {
         setSubmitStatus('idle');
         setErrorMessage('');
+        setRequestId('');
       }, 5000);
     }
   };
@@ -362,6 +368,12 @@ const ContactPage: React.FC = () => {
                       <span className="font-semibold">Thank you for your message!</span>
                     </div>
                     <p className="mt-1">We'll get back to you within 24 hours. For urgent matters, please call us directly.</p>
+                    {requestId && (
+                      <div className="mt-2 p-2 bg-green-50 rounded border border-green-200">
+                        <p className="text-sm font-medium">Reference ID: <span className="font-mono">{requestId}</span></p>
+                        <p className="text-xs text-green-600 mt-1">Please save this ID for your records</p>
+                      </div>
+                    )}
                   </motion.div>
                 )}
 

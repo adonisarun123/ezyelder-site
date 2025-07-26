@@ -40,6 +40,7 @@ const JoinUsPage: React.FC = () => {
 
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [requestId, setRequestId] = useState<string>('');
 
   const memberInterests = [
     'Health & Wellness', 'Technology Training', 'Arts & Crafts', 'Music & Dance',
@@ -132,7 +133,10 @@ const JoinUsPage: React.FC = () => {
       };
 
       // Save to Supabase
-      await memberService.createMember(memberData);
+      const result = await memberService.createMember(memberData);
+      
+      // Set request ID from response
+      setRequestId(result.requestId);
       
       // Send email notification
       await emailService.notifyMemberApplication(memberData);
@@ -142,6 +146,7 @@ const JoinUsPage: React.FC = () => {
       // Reset form after success
       setTimeout(() => {
         setSubmitStatus('idle');
+        setRequestId('');
         setMemberForm({
           firstName: '', lastName: '', email: '', phone: '', dateOfBirth: '',
           address: '', city: '', emergencyContact: '', emergencyPhone: '',
@@ -158,6 +163,7 @@ const JoinUsPage: React.FC = () => {
       setTimeout(() => {
         setSubmitStatus('idle');
         setErrorMessage('');
+        setRequestId('');
       }, 5000);
     }
   };
@@ -186,7 +192,10 @@ const JoinUsPage: React.FC = () => {
       };
 
       // Save to Supabase
-      await volunteerService.createVolunteer(volunteerData);
+      const result = await volunteerService.createVolunteer(volunteerData);
+      
+      // Set request ID from response
+      setRequestId(result.requestId);
       
       // Send email notification
       await emailService.notifyVolunteerApplication(volunteerData);
@@ -196,6 +205,7 @@ const JoinUsPage: React.FC = () => {
       // Reset form after success
       setTimeout(() => {
         setSubmitStatus('idle');
+        setRequestId('');
         setVolunteerForm({
           firstName: '', lastName: '', email: '', phone: '', address: '', city: '',
           occupation: '', skills: [], availability: [], experience: '',
@@ -212,6 +222,7 @@ const JoinUsPage: React.FC = () => {
       setTimeout(() => {
         setSubmitStatus('idle');
         setErrorMessage('');
+        setRequestId('');
       }, 5000);
     }
   };
@@ -563,6 +574,12 @@ const JoinUsPage: React.FC = () => {
                        <span className="font-semibold">Application submitted successfully!</span>
                      </div>
                      <p className="mt-1">Welcome to the EzyElders family! We'll contact you within 48 hours to complete your membership.</p>
+                     {requestId && (
+                       <div className="mt-2 p-2 bg-green-50 rounded border border-green-200">
+                         <p className="text-sm font-medium">Reference ID: <span className="font-mono">{requestId}</span></p>
+                         <p className="text-xs text-green-600 mt-1">Please save this ID for your records</p>
+                       </div>
+                     )}
                    </motion.div>
                  )}
 
@@ -883,6 +900,12 @@ const JoinUsPage: React.FC = () => {
                        <span className="font-semibold">Volunteer application submitted successfully!</span>
                      </div>
                      <p className="mt-1">Thank you for your interest in volunteering! We'll contact you within 48 hours to discuss next steps.</p>
+                     {requestId && (
+                       <div className="mt-2 p-2 bg-green-50 rounded border border-green-200">
+                         <p className="text-sm font-medium">Reference ID: <span className="font-mono">{requestId}</span></p>
+                         <p className="text-xs text-green-600 mt-1">Please save this ID for your records</p>
+                       </div>
+                     )}
                    </motion.div>
                  )}
 

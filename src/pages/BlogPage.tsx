@@ -9,6 +9,7 @@ const BlogPage: React.FC = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [requestId, setRequestId] = useState<string>('');
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,7 +19,10 @@ const BlogPage: React.FC = () => {
     try {
       // Save to Supabase
       const subscriptionData = { email: newsletterEmail, source: 'blog' as const };
-      await newsletterService.createSubscription(subscriptionData);
+      const result = await newsletterService.createSubscription(subscriptionData);
+      
+      // Set request ID from response
+      setRequestId(result.requestId);
       
       // Send email notification
       await emailService.notifyNewsletterSubscription(subscriptionData);
@@ -28,6 +32,7 @@ const BlogPage: React.FC = () => {
       // Reset form after success
       setTimeout(() => {
         setSubmitStatus('idle');
+        setRequestId('');
         setNewsletterEmail('');
       }, 5000);
       
@@ -40,6 +45,7 @@ const BlogPage: React.FC = () => {
       setTimeout(() => {
         setSubmitStatus('idle');
         setErrorMessage('');
+        setRequestId('');
       }, 5000);
     }
   };
@@ -279,6 +285,12 @@ const BlogPage: React.FC = () => {
                     <span className="font-semibold">Successfully subscribed!</span>
                   </div>
                   <p className="text-center text-sm mt-1">You'll receive our latest posts in your inbox.</p>
+                  {requestId && (
+                    <div className="mt-2 p-2 bg-white/30 rounded border border-white/40">
+                      <p className="text-center text-sm font-medium">Reference ID: <span className="font-mono">{requestId}</span></p>
+                      <p className="text-center text-xs mt-1">Please save this ID for your records</p>
+                    </div>
+                  )}
                 </motion.div>
               )}
 
