@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Heart, Users, CheckCircle, Star } from 'lucide-react';
 import { contactService } from '../lib/supabase';
 import { emailService } from '../lib/emailService';
@@ -135,6 +136,12 @@ const ContactPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Contact EzyElders - Get in Touch for Senior Care Services"
+        description="Contact EzyElders for inquiries about our senior care services. Reach out via phone, email, or visit our center. We're here to answer questions about elder care, wellness programs, and community activities."
+        keywords="contact EzyElders, senior care inquiries, elder care contact, senior services phone number, senior care consultation"
+        url="/contact"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

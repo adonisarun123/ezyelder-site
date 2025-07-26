@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
+import SEO from '../components/SEO';
 
 interface Testimonial {
   id: number;
@@ -93,6 +94,12 @@ const TestimonialsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Testimonials - What Our Community Says About EzyElders"
+        description="Read heartfelt testimonials from seniors and families who have experienced EzyElders' exceptional care services. Discover stories of improved wellness, community connection, and quality of life."
+        keywords="EzyElders testimonials, senior care reviews, elder care testimonials, senior community feedback, family testimonials, senior care success stories"
+        url="/testimonials"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-lavender to-sky py-20">
         <div className="section-padding">

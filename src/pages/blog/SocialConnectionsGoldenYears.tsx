@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, User, Clock, Calendar, Share2, Heart, Users, Coffee, BookOpen, Music, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../../components/SEO';
 
 const SocialConnectionsGoldenYears: React.FC = () => {
   const benefits = [
@@ -56,6 +57,13 @@ const SocialConnectionsGoldenYears: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Social Connections in Golden Years - Building Community for Seniors"
+        description="Explore the importance of social connections for seniors and practical ways to build meaningful relationships, combat loneliness, and maintain an active social life in golden years."
+        keywords="senior social connections, elderly community, senior friendships, combating loneliness seniors, social activities elderly, senior relationships, community building seniors"
+        url="/blog/social-connections-golden-years"
+        type="article"
+      />
       {/* Navigation */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

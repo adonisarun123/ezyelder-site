@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, User, Clock, Calendar, Share2, Heart, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../../components/SEO';
 
 const YogaBenefitsSeniorCitizens: React.FC = () => {
   const benefits = [
@@ -77,6 +78,13 @@ const YogaBenefitsSeniorCitizens: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Yoga Benefits for Senior Citizens - Gentle Fitness & Wellness"
+        description="Discover the amazing benefits of yoga for seniors including improved flexibility, balance, mental health, and overall wellness. Learn safe yoga practices specifically designed for senior citizens."
+        keywords="yoga for seniors, senior fitness, yoga benefits elderly, gentle yoga, senior balance, elder flexibility, mindful movement seniors, yoga for older adults"
+        url="/blog/yoga-benefits-senior-citizens"
+        type="article"
+      />
       {/* Navigation */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

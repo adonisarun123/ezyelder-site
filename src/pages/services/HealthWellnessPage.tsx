@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../../components/SEO';
 import { Activity, Heart, Brain, Users, Clock, CheckCircle, Star, Shield, Phone } from 'lucide-react';
 
 const HealthWellnessPage: React.FC = () => {
@@ -82,6 +83,12 @@ const HealthWellnessPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Health & Wellness Programs for Seniors - EzyElders"
+        description="Comprehensive health and wellness programs designed for senior citizens. Includes fitness classes, nutritional guidance, health monitoring, mental wellness support, and preventive care services at EzyElders."
+        keywords="senior health programs, elder wellness, senior fitness, nutritional guidance seniors, mental health seniors, preventive care elderly, senior wellness center"
+        url="/offerings/health-wellness"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

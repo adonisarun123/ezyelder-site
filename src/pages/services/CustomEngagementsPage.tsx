@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../../components/SEO';
 import { Users, Gift, Music, Palette, Calendar, Star, Clock, CheckCircle, Heart, Phone, PartyPopper, Camera, Crown } from 'lucide-react';
 
 const CustomEngagementsPage: React.FC = () => {
@@ -128,6 +129,12 @@ const CustomEngagementsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Custom Engagement Programs for Seniors - Personalized Care"
+        description="Personalized engagement programs tailored to individual senior needs. Custom activities, specialized care plans, birthday celebrations, hobby clubs, and individualized services at EzyElders."
+        keywords="custom senior programs, personalized elder care, specialized senior activities, individual care plans, senior birthday celebrations, hobby clubs elderly, tailored senior services"
+        url="/offerings/custom-engagements"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

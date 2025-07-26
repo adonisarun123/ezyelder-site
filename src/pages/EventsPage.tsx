@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import { Calendar, Clock, MapPin, Users, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
 
 interface Event {
@@ -141,6 +142,12 @@ const EventsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Senior Events & Activities - EzyElders Community Calendar"
+        description="Discover upcoming events and activities at EzyElders. Join our community calendar featuring wellness workshops, social gatherings, educational sessions, and fun activities designed for senior citizens."
+        keywords="senior events, elder activities, senior calendar, community events, senior workshops, elder social activities, senior gatherings"
+        url="/events"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

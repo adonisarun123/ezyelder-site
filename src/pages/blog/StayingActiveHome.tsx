@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, User, Clock, Calendar, Share2, Home, Activity, Heart, Shield, CheckCircle, Timer } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../../components/SEO';
 
 const StayingActiveHome: React.FC = () => {
   const exercises = [
@@ -46,6 +47,13 @@ const StayingActiveHome: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Staying Active at Home for Seniors - Indoor Exercise Guide"
+        description="Practical ways for seniors to stay active and healthy at home. Discover safe indoor exercises, activities, and wellness routines designed specifically for older adults."
+        keywords="seniors staying active home, indoor exercises seniors, home fitness elderly, senior home workouts, active aging at home, elderly indoor activities"
+        url="/blog/staying-active-home"
+        type="article"
+      />
       {/* Navigation */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

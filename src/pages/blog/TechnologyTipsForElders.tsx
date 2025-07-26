@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, User, Clock, Calendar, Share2, Smartphone, Wifi, Shield, MessageCircle, Camera, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../../components/SEO';
 
 const TechnologyTipsForElders: React.FC = () => {
   const technologies = [
@@ -78,6 +79,13 @@ const TechnologyTipsForElders: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Technology Tips for Elders - Digital Skills for Senior Citizens"
+        description="Practical technology tips and digital skills for senior citizens. Learn smartphone basics, video calling, online safety, and how to stay connected with technology in simple, easy-to-follow steps."
+        keywords="technology tips seniors, digital skills elderly, smartphone tips seniors, tech help for elders, senior technology training, digital literacy seniors"
+        url="/blog/technology-tips-for-elders"
+        type="article"
+      />
       {/* Navigation */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

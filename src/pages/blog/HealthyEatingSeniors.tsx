@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, User, Clock, Calendar, Share2, Apple, Heart, Shield, Utensils, CheckCircle, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../../components/SEO';
 
 const HealthyEatingSeniors: React.FC = () => {
   const nutrients = [
@@ -56,6 +57,13 @@ const HealthyEatingSeniors: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Healthy Eating Guide for Seniors - Nutrition & Wellness Tips"
+        description="Complete nutrition guide for senior citizens including meal planning, dietary requirements, cooking tips, and healthy eating habits for optimal wellness in golden years."
+        keywords="healthy eating seniors, senior nutrition, elderly diet plan, senior meal planning, nutrition for older adults, healthy cooking seniors"
+        url="/blog/healthy-eating-seniors"
+        type="article"
+      />
       {/* Navigation */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

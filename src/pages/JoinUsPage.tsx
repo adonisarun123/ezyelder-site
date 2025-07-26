@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import { Heart, Users, Clock, Award, Send, User, Phone, Mail, CheckCircle, Star } from 'lucide-react';
 import { memberService, volunteerService } from '../lib/supabase';
 import { emailService } from '../lib/emailService';
@@ -229,6 +230,12 @@ const JoinUsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Join EzyElders - Become a Member or Volunteer"
+        description="Join the EzyElders community as a member to access comprehensive senior care services, or become a volunteer to make a difference in seniors' lives. Apply today to be part of our caring community."
+        keywords="join EzyElders, become member, volunteer opportunities, senior community membership, elder care volunteer, senior center membership, volunteer for seniors"
+        url="/join-us"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

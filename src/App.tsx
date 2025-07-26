@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -37,7 +38,8 @@ import DigitalBankingSeniors from './pages/blog/DigitalBankingSeniors';
 
 function App() {
   return (
-    <Router>
+    <HelmetProvider>
+      <Router>
       <div className="min-h-screen flex flex-col bg-gray-50">
         <ScrollToTop />
         <Header />
@@ -73,6 +75,7 @@ function App() {
         <WhatsAppButton />
       </div>
     </Router>
+    </HelmetProvider>
   );
 }
 

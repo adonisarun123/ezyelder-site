@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../../components/SEO';
 import { MapPin, Users, Camera, Bus, Sparkles, Calendar, Clock, CheckCircle, Star, Heart, Phone, Compass, TreePine, Mountain, Building } from 'lucide-react';
 
 const LeisureOutingsPage: React.FC = () => {
@@ -116,6 +117,12 @@ const LeisureOutingsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Leisure Outings & Tours for Seniors - EzyElders"
+        description="Explore the world safely with EzyElders' supervised leisure outings and tours. Enjoy cultural visits, nature walks, shopping trips, museum tours, and social excursions designed specifically for senior citizens."
+        keywords="senior outings, elderly tours, cultural visits seniors, nature walks elderly, senior excursions, group outings seniors, senior travel, safe outings elderly"
+        url="/offerings/leisure-outings"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

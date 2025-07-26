@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../../components/SEO';
 import { Smartphone, Video, ShoppingCart, Shield, Wifi, Camera, Mail, MessageCircle, Clock, CheckCircle, Star, Heart, Phone, Brain } from 'lucide-react';
 
 const TechnologyPage: React.FC = () => {
@@ -109,6 +110,12 @@ const TechnologyPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Technology Training for Seniors - Digital Learning Programs"
+        description="Learn technology with confidence at EzyElders. We offer smartphone training, computer skills, video calling, online safety, and digital literacy programs specifically designed for senior citizens."
+        keywords="senior technology training, digital literacy seniors, smartphone training elderly, computer skills seniors, online safety for elderly, senior digital education"
+        url="/offerings/technology"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

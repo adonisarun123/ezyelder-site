@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import { X, Play, Filter } from 'lucide-react';
 
 interface GalleryItem {
@@ -146,6 +147,12 @@ const GalleryPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Photo Gallery - EzyElders Community Moments"
+        description="Explore our photo gallery showcasing memorable moments, activities, and community life at EzyElders. See seniors enjoying wellness programs, social events, and daily activities in our caring environment."
+        keywords="EzyElders gallery, senior photos, community moments, senior activities photos, elder care center gallery, senior community life"
+        url="/gallery"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

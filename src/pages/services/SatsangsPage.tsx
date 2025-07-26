@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../../components/SEO';
 import { Music, Book, Heart, Users, Sparkles, Clock, Phone, CheckCircle, Star, Brain } from 'lucide-react';
 
 const SatsangsPage: React.FC = () => {
@@ -95,6 +96,12 @@ const SatsangsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Spiritual Guidance & Satsangs for Seniors - EzyElders"
+        description="Find spiritual peace and community connection through our Satsangs and spiritual guidance programs. Join fellow seniors in meditation, prayer, spiritual discussions, and meaningful fellowship at EzyElders."
+        keywords="senior spiritual guidance, satsangs for elderly, meditation seniors, spiritual community seniors, prayer groups elderly, senior fellowship, spiritual wellness elderly"
+        url="/offerings/satsangs"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

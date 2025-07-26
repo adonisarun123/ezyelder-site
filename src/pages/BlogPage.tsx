@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Clock, ChevronRight, Calendar, Send, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import { newsletterService } from '../lib/supabase';
 import { emailService } from '../lib/emailService';
 
@@ -127,6 +128,12 @@ const BlogPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Senior Care Blog - Health, Wellness & Lifestyle Tips for Seniors"
+        description="Discover expert tips, insights, and guidance on senior health, wellness, technology, and lifestyle. Stay informed with EzyElders' blog featuring articles on nutrition, fitness, digital literacy, and more for senior citizens."
+        keywords="senior health blog, elder care tips, senior wellness articles, healthy aging, senior lifestyle, senior nutrition, senior fitness, senior technology tips"
+        url="/blog"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from '../components/SEO';
 import { Activity, Compass, BookOpen, Video, Users, ChevronRight, Clock, Star, Shield, Heart, CheckCircle, Calendar } from 'lucide-react';
 
 const OfferingsPage: React.FC = () => {
@@ -196,6 +197,12 @@ const OfferingsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Our Services - Comprehensive Senior Care & Wellness Programs"
+        description="Explore EzyElders' comprehensive senior care services including health & wellness programs, leisure activities, technology training, spiritual guidance, and custom engagement programs designed specifically for senior citizens."
+        keywords="senior care services, elder wellness programs, senior activities, health programs for seniors, senior technology training, spiritual guidance, custom senior programs"
+        url="/offerings"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
