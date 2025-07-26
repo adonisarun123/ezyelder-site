@@ -1,9 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import SEO from '../components/SEO';
+import { useSEO } from '../hooks/useSEO';
 import { Heart, Target, Users, Award, CheckCircle, Clock, MapPin, Phone } from 'lucide-react';
 
 const AboutPage: React.FC = () => {
+  // SEO for about page
+  useSEO({
+    title: "About EzyElders - Our Mission & Vision for Senior Care",
+    description: "Learn about EzyElders' dedication to senior care excellence. Discover our mission, values, and commitment to providing comprehensive wellness services, community engagement, and personalized care for senior citizens.",
+    keywords: "about EzyElders, senior care mission, elder care philosophy, senior wellness center, senior community services, elder care values",
+    url: "/about"
+  });
+
   const values = [
     {
       icon: <Heart className="w-8 h-8" />,
@@ -74,12 +82,6 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <SEO 
-        title="About EzyElders - Our Mission & Vision for Senior Care"
-        description="Learn about EzyElders' dedication to senior care excellence. Discover our mission, values, and commitment to providing comprehensive wellness services, community engagement, and personalized care for senior citizens."
-        keywords="about EzyElders, senior care mission, elder care philosophy, senior wellness center, senior community services, elder care values"
-        url="/about"
-      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-gray-50 via-white to-gray-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
