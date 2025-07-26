@@ -1,63 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom base styles for accessibility */
+/* Custom base styles for accessibility and design guide compliance */
 @layer base {
   html {
-    font-size: 18px; /* Larger base font size for better readability */
+    font-size: 16px; /* Standard base font size following design guide */
   }
   
   body {
-    @apply antialiased;
-  }
-  
-  /* High contrast mode styles */
-  .high-contrast {
-    @apply bg-black text-white;
-  }
-  
-  .high-contrast * {
-    @apply border-white;
-  }
-  
-  .high-contrast .bg-lavender {
-    @apply bg-purple-800;
-  }
-  
-  .high-contrast .bg-sage {
-    @apply bg-green-800;
-  }
-  
-  .high-contrast .bg-sky {
-    @apply bg-blue-800;
-  }
-  
-  .high-contrast .bg-warm-beige {
-    @apply bg-yellow-800;
+    @apply antialiased font-sans text-gray-800;
   }
 }
 
-/* Custom component classes */
+/* Custom component classes following EzyElders design guide */
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-dark-lavender text-white rounded-full font-semibold text-lg 
-           hover:bg-purple-700 transition-colors duration-200 
-           focus:outline-none focus:ring-4 focus:ring-lavender;
+    @apply px-6 py-3 bg-pink-600 text-white rounded-lg font-semibold text-lg 
+           hover:bg-pink-700 transition-colors duration-200 hover:scale-105 transform
+           focus:outline-none focus:ring-4 focus:ring-pink-600 focus:ring-opacity-50;
   }
   
   .btn-secondary {
-    @apply px-6 py-3 bg-sage text-white rounded-full font-semibold text-lg 
-           hover:bg-dark-sage transition-colors duration-200 
-           focus:outline-none focus:ring-4 focus:ring-green-300;
+    @apply px-6 py-3 bg-cyan-500 text-white rounded-lg font-semibold text-lg 
+           hover:bg-cyan-600 transition-colors duration-200 hover:scale-105 transform
+           focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50;
   }
   
   .card {
-    @apply bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300;
+    @apply bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-gray-300;
   }
   
   .section-padding {
-    @apply px-6 py-12 md:px-12 lg:px-24;
+    @apply px-4 py-8 md:px-8 md:py-12 lg:px-12 lg:py-16 max-w-7xl mx-auto;
   }
 }
 
@@ -66,9 +43,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Focus styles for accessibility */
+/* Focus styles for accessibility following design guide */
 *:focus-visible {
-  @apply outline-none ring-4 ring-dark-lavender ring-opacity-50;
+  @apply outline-none ring-4 ring-pink-600 ring-opacity-50 rounded-lg;
 }
 
 /* Image zoom on hover */
@@ -76,20 +53,44 @@ html {
   @apply transition-transform duration-300 hover:scale-105;
 }
 
-/* Scrollbar styles */
+/* Scrollbar styles following design guide */
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-lavender;
+  @apply bg-gray-200;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-lavender rounded-full;
+  @apply bg-pink-600 rounded-lg;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-purple-700;
+  @apply bg-pink-700;
+}
+
+/* Animation classes for enhanced UX */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  .animate-scale-up {
+    animation: scaleUp 0.2s ease-out;
+  }
+}
+
+/* Ensure proper line heights for readability */
+p {
+  @apply leading-relaxed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply leading-tight;
 }

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import OfferingsPage from './pages/OfferingsPage';
@@ -24,18 +25,20 @@ import LeisureOutingsPage from './pages/services/LeisureOutingsPage';
 import SatsangsPage from './pages/services/SatsangsPage';
 import CustomEngagementsPage from './pages/services/CustomEngagementsPage';
 
+// Blog post pages
+import YogaBenefitsSeniorCitizens from './pages/blog/YogaBenefitsSeniorCitizens';
+import TechnologyTipsForElders from './pages/blog/TechnologyTipsForElders';
+import SocialConnectionsGoldenYears from './pages/blog/SocialConnectionsGoldenYears';
+import HealthyEatingSeniors from './pages/blog/HealthyEatingSeniors';
+import StayingActiveHome from './pages/blog/StayingActiveHome';
+import DigitalBankingSeniors from './pages/blog/DigitalBankingSeniors';
+
 function App() {
-  const [highContrast, setHighContrast] = useState(false);
-
-  const toggleHighContrast = () => {
-    setHighContrast(!highContrast);
-    document.body.classList.toggle('high-contrast');
-  };
-
   return (
     <Router>
-      <div className={`min-h-screen flex flex-col ${highContrast ? 'high-contrast' : 'bg-warm-beige/10'}`}>
-        <Header highContrast={highContrast} toggleHighContrast={toggleHighContrast} />
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <ScrollToTop />
+        <Header />
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -51,6 +54,12 @@ function App() {
             <Route path="/testimonials" element={<TestimonialsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/yoga-benefits-senior-citizens" element={<YogaBenefitsSeniorCitizens />} />
+            <Route path="/blog/technology-tips-for-elders" element={<TechnologyTipsForElders />} />
+            <Route path="/blog/social-connections-golden-years" element={<SocialConnectionsGoldenYears />} />
+            <Route path="/blog/healthy-eating-seniors" element={<HealthyEatingSeniors />} />
+            <Route path="/blog/staying-active-home" element={<StayingActiveHome />} />
+            <Route path="/blog/digital-banking-seniors" element={<DigitalBankingSeniors />} />
             <Route path="/join-us" element={<JoinUsPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />

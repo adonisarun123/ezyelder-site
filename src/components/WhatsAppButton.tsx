@@ -17,7 +17,7 @@ const WhatsAppButton: React.FC = () => {
       aria-label="Contact us on WhatsApp"
     >
       <MessageCircle className="w-6 h-6" />
-      <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+      <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
         Need help? Chat with us!
       </span>
     </button>

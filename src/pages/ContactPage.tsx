@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle, Heart, Users, CheckCircle, Star } from 'lucide-react';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -39,66 +39,110 @@ const ContactPage: React.FC = () => {
   const contactInfo = [
     {
       icon: <Phone className="w-6 h-6" />,
-      title: 'Call Us',
+      title: 'Call Us Anytime',
       details: ['+91-73496 53339'],
-      action: 'tel:+917349653339'
+      description: 'Speak directly with our care coordinators who understand senior needs',
+      action: 'tel:+917349653339',
+      color: 'bg-pink-100 text-pink-600'
     },
     {
       icon: <Mail className="w-6 h-6" />,
-      title: 'Email Us',
+      title: 'Email Support',
       details: ['info@ezyhelpers.com'],
-      action: 'mailto:info@ezyhelpers.com'
+      description: 'Send us detailed questions and receive comprehensive responses',
+      action: 'mailto:info@ezyhelpers.com',
+      color: 'bg-cyan-100 text-cyan-500'
     },
     {
       icon: <MapPin className="w-6 h-6" />,
-      title: 'Visit Us',
+      title: 'Visit Our Center',
       details: [
         'No 10, 5th B Cross',
         'Sharadamba Nagar, Jalahalli',
         'Bangalore - 560013'
       ],
-      action: 'https://maps.google.com/?q=13.0500,77.5500'
+      description: 'Tour our facilities and meet our team in person',
+      action: 'https://maps.google.com/?q=13.0500,77.5500',
+      color: 'bg-pink-100 text-pink-600'
     },
     {
       icon: <Clock className="w-6 h-6" />,
-      title: 'Working Hours',
+      title: 'Operating Hours',
       details: [
         'Monday - Friday: 9:00 AM - 6:00 PM',
         'Saturday: 9:00 AM - 1:00 PM',
-        'Sunday: Closed'
-      ]
+        'Sunday: Emergency support only'
+      ],
+      description: 'Extended hours for your convenience and peace of mind',
+      color: 'bg-cyan-100 text-cyan-500'
+    }
+  ];
+
+  const reasons = [
+    {
+      icon: <Heart className="w-8 h-8" />,
+      title: 'Personalized Care',
+      description: 'Every senior receives individual attention tailored to their unique needs and preferences'
+    },
+    {
+      icon: <Users className="w-8 h-8" />,
+      title: 'Family Involvement',
+      description: 'We keep families informed and involved in all aspects of care and activities'
+    },
+    {
+      icon: <CheckCircle className="w-8 h-8" />,
+      title: 'Proven Experience',
+      description: 'Years of dedicated service to the senior community with countless success stories'
+    },
+    {
+      icon: <Star className="w-8 h-8" />,
+      title: 'Quality Assurance',
+      description: 'Regular feedback and continuous improvement ensure the highest standards of service'
     }
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-lavender to-sky py-20">
-        <div className="section-padding">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl font-bold text-gray-800 mb-6">Get in Touch</h1>
-            <p className="text-xl text-gray-700 leading-relaxed">
-              We're here to answer your questions and help you join our community. 
-              Reach out to us through any of the channels below.
+            <h1 className="text-5xl font-bold text-gray-800 mb-6">Get in Touch with EzyElders</h1>
+            <p className="text-xl text-gray-800 leading-relaxed mb-8">
+              We're here to answer your questions, address your concerns, and help you or your loved ones join our caring senior community. Our experienced team understands the unique needs of seniors and their families.
             </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <div className="bg-white px-6 py-3 rounded-lg shadow-md border border-gray-300">
+                <span className="text-pink-600 font-semibold">24/7 Emergency Support</span>
+              </div>
+              <div className="bg-white px-6 py-3 rounded-lg shadow-md border border-gray-300">
+                <span className="text-cyan-500 font-semibold">Family-Friendly Service</span>
+              </div>
+              <div className="bg-white px-6 py-3 rounded-lg shadow-md border border-gray-300">
+                <span className="text-pink-600 font-semibold">Senior Care Experts</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Contact Information & Form */}
       <section className="py-20 bg-white">
-        <div className="section-padding">
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
             >
-              <h2 className="text-3xl font-bold text-gray-800 mb-8">Contact Information</h2>
+              <h2 className="text-4xl font-bold text-gray-800 mb-8">Multiple Ways to Reach Us</h2>
+              <p className="text-lg text-gray-800 mb-8">
+                Choose the communication method that works best for you. We're committed to making it easy for seniors and their families to connect with us.
+              </p>
               
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
@@ -107,29 +151,32 @@ const ContactPage: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex gap-4"
+                    className="bg-white p-6 rounded-xl shadow-lg border border-gray-300 hover:shadow-xl transition-shadow duration-300"
                   >
-                    <div className="bg-lavender/20 p-3 rounded-lg flex-shrink-0">
-                      <div className="text-dark-lavender">{info.icon}</div>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-800 mb-1">{info.title}</h3>
-                      {info.action ? (
-                        <a 
-                          href={info.action}
-                          target={info.action.startsWith('http') ? '_blank' : undefined}
-                          rel={info.action.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="text-gray-600 hover:text-dark-lavender transition-colors"
-                        >
-                          {info.details.map((detail, idx) => (
-                            <p key={idx}>{detail}</p>
-                          ))}
-                        </a>
-                      ) : (
-                        info.details.map((detail, idx) => (
-                          <p key={idx} className="text-gray-600">{detail}</p>
-                        ))
-                      )}
+                    <div className="flex gap-4">
+                      <div className={`${info.color} p-3 rounded-lg flex-shrink-0`}>
+                        {info.icon}
+                      </div>
+                      <div className="flex-grow">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-2">{info.title}</h3>
+                        <p className="text-sm text-gray-800 mb-3">{info.description}</p>
+                        {info.action ? (
+                          <a 
+                            href={info.action}
+                            target={info.action.startsWith('http') ? '_blank' : undefined}
+                            rel={info.action.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            className="text-gray-800 hover:text-pink-600 transition-colors font-medium"
+                          >
+                            {info.details.map((detail, idx) => (
+                              <p key={idx} className="mb-1">{detail}</p>
+                            ))}
+                          </a>
+                        ) : (
+                          info.details.map((detail, idx) => (
+                            <p key={idx} className="text-gray-800 font-medium mb-1">{detail}</p>
+                          ))
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -139,23 +186,23 @@ const ContactPage: React.FC = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="mt-8 p-6 bg-green-50 rounded-xl"
+                className="mt-8 p-6 bg-green-50 rounded-xl border border-green-200"
               >
-                <h3 className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
-                  <MessageCircle className="w-5 h-5 text-green-600" />
-                  Quick Response on WhatsApp
+                <h3 className="text-xl font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                  <MessageCircle className="w-6 h-6 text-green-600" />
+                  Instant WhatsApp Support
                 </h3>
-                <p className="text-gray-600 mb-4">
-                  Get instant responses to your queries on WhatsApp
+                <p className="text-gray-800 mb-4">
+                  Get immediate responses to urgent questions or schedule a visit through WhatsApp. Our team is ready to help you right away.
                 </p>
                 <a
-                  href="https://wa.me/917349653339?text=Hello,%20I%20need%20information%20about%20EzyElders"
+                  href="https://wa.me/917349653339?text=Hello,%20I%20need%20information%20about%20EzyElders%20services%20for%20seniors"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 transition-colors"
+                  className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  Chat on WhatsApp
+                  Start WhatsApp Chat
                 </a>
               </motion.div>
             </motion.div>
@@ -164,13 +211,16 @@ const ContactPage: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              className="card"
+              className="bg-white p-8 rounded-xl shadow-lg border border-gray-300"
             >
-              <h2 className="text-3xl font-bold text-gray-800 mb-8">Send Us a Message</h2>
+              <h2 className="text-4xl font-bold text-gray-800 mb-6">Send Us a Message</h2>
+              <p className="text-lg text-gray-800 mb-8">
+                Fill out this form and we'll get back to you within 24 hours. For urgent matters, please call us directly.
+              </p>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+                  <label htmlFor="name" className="block text-gray-800 font-semibold mb-2 text-lg">
                     Your Name *
                   </label>
                   <input
@@ -180,14 +230,14 @@ const ContactPage: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-dark-lavender focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-600 focus:border-transparent text-lg"
                     placeholder="Enter your full name"
                   />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
+                    <label htmlFor="email" className="block text-gray-800 font-semibold mb-2 text-lg">
                       Email Address *
                     </label>
                     <input
@@ -197,14 +247,14 @@ const ContactPage: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-dark-lavender focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-600 focus:border-transparent text-lg"
                       placeholder="your@email.com"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-gray-700 font-medium mb-2">
-                      Phone Number
+                    <label htmlFor="phone" className="block text-gray-800 font-semibold mb-2 text-lg">
+                      Phone Number *
                     </label>
                     <input
                       type="tel"
@@ -212,15 +262,16 @@ const ContactPage: React.FC = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-dark-lavender focus:border-transparent"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-600 focus:border-transparent text-lg"
                       placeholder="+91 XXXXX XXXXX"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-gray-700 font-medium mb-2">
-                    Subject *
+                  <label htmlFor="subject" className="block text-gray-800 font-semibold mb-2 text-lg">
+                    How Can We Help You? *
                   </label>
                   <select
                     id="subject"
@@ -228,20 +279,26 @@ const ContactPage: React.FC = () => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-dark-lavender focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-600 focus:border-transparent text-lg"
                   >
-                    <option value="">Select a subject</option>
-                    <option value="membership">Membership Inquiry</option>
-                    <option value="programs">Programs Information</option>
+                    <option value="">Select your inquiry type</option>
+                    <option value="membership">Membership & Enrollment Information</option>
+                    <option value="programs">Programs & Services Details</option>
+                    <option value="health">Health & Wellness Programs</option>
+                    <option value="technology">Technology Training Classes</option>
+                    <option value="outings">Tours & Outings Schedule</option>
+                    <option value="spiritual">Spiritual & Cultural Activities</option>
+                    <option value="family">Family Member Concerns</option>
                     <option value="volunteer">Volunteer Opportunities</option>
+                    <option value="feedback">Feedback & Suggestions</option>
+                    <option value="emergency">Emergency Support</option>
                     <option value="general">General Inquiry</option>
-                    <option value="feedback">Feedback</option>
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
-                    Message *
+                  <label htmlFor="message" className="block text-gray-800 font-semibold mb-2 text-lg">
+                    Your Message *
                   </label>
                   <textarea
                     id="message"
@@ -250,8 +307,8 @@ const ContactPage: React.FC = () => {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-dark-lavender focus:border-transparent resize-none"
-                    placeholder="Tell us how we can help you..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-600 focus:border-transparent resize-none text-lg"
+                    placeholder="Please tell us about your specific needs, questions, or concerns. The more details you provide, the better we can assist you."
                   />
                 </div>
 
@@ -259,15 +316,19 @@ const ContactPage: React.FC = () => {
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-green-100 text-green-700 p-4 rounded-lg"
+                    className="bg-green-100 text-green-700 p-4 rounded-lg border border-green-300"
                   >
-                    Thank you for your message! We'll get back to you soon.
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-5 h-5" />
+                      <span className="font-semibold">Thank you for your message!</span>
+                    </div>
+                    <p className="mt-1">We'll get back to you within 24 hours. For urgent matters, please call us directly.</p>
                   </motion.div>
                 )}
 
                 <button
                   type="submit"
-                  className="btn-primary w-full flex items-center justify-center gap-2"
+                  className="w-full px-6 py-4 bg-pink-600 text-white rounded-lg font-semibold text-lg hover:bg-pink-700 transition-colors flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
                   disabled={submitStatus === 'success'}
                 >
                   <Send className="w-5 h-5" />
@@ -279,57 +340,110 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Map Section */}
+      {/* Why Choose EzyElders */}
       <section className="py-20 bg-gray-50">
-        <div className="section-padding">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="max-w-6xl mx-auto"
+            className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Find Us Here</h2>
-            <div className="bg-white p-2 rounded-xl shadow-lg">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.0142!2d77.5500!3d13.0500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAzJzAwLjAiTiA3N8KwMzMnMDAuMCJF!5e0!3m2!1sen!2sin!4v1635959456789!5m2!1sen!2sin"
-                title="EzyElders Location Map"
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                className="rounded-lg"
-              ></iframe>
-            </div>
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">Why Families Choose EzyElders</h2>
+            <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+              When you contact us, you're not just reaching a service provider – you're connecting with a team that truly cares about senior well-being
+            </p>
           </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {reasons.map((reason, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white p-6 rounded-xl shadow-lg border border-gray-300 text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+              >
+                <div className="bg-pink-100 w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4 text-pink-600">
+                  {reason.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">{reason.title}</h3>
+                <p className="text-gray-800">{reason.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">Visit Our Welcoming Center</h2>
+            <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+              Our facility is designed with seniors in mind – accessible, comfortable, and located in a peaceful neighborhood. Schedule a visit to see our programs in action.
+            </p>
+          </motion.div>
+          
+          <div className="bg-white p-4 rounded-xl shadow-lg border border-gray-300">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.0142!2d77.5500!3d13.0500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAzJzAwLjAiTiA3N8KwMzMnMDAuMCJF!5e0!3m2!1sen!2sin!4v1635959456789!5m2!1sen!2sin"
+              title="EzyElders Location Map - Senior Care Center in Bangalore"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              className="rounded-lg"
+            ></iframe>
+          </div>
+          
+          <div className="mt-8 grid md:grid-cols-3 gap-6 text-center">
+            <div className="bg-gray-50 p-6 rounded-xl border border-gray-300">
+              <h3 className="font-semibold text-gray-800 mb-2">Accessible Parking</h3>
+              <p className="text-gray-800">Dedicated parking spaces for seniors and disabled visitors</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-xl border border-gray-300">
+              <h3 className="font-semibold text-gray-800 mb-2">Public Transport</h3>
+              <p className="text-gray-800">Bus stops and auto-rickshaw stands nearby for easy access</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-xl border border-gray-300">
+              <h3 className="font-semibold text-gray-800 mb-2">Safe Neighborhood</h3>
+              <p className="text-gray-800">Located in a quiet, senior-friendly residential area</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-dark-lavender to-purple-700 text-white">
-        <div className="section-padding text-center">
+      <section className="py-20 bg-gradient-to-r from-pink-600 to-cyan-500 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            <h2 className="text-4xl font-bold mb-4">Ready to Join Our Community?</h2>
+            <h2 className="text-4xl font-bold mb-4">Ready to Start Your Journey with EzyElders?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Don't wait to start your journey towards a more active and fulfilling life
+              Don't wait to enhance your quality of life or that of your loved ones. Contact us today and discover how we can make the senior years truly golden.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <a href="tel:+917349653339">
-                <button className="bg-white text-dark-lavender px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors flex items-center gap-2">
+                <button className="bg-white text-pink-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors flex items-center gap-2">
                   <Phone className="w-5 h-5" />
-                  Call Now
+                  Call Us Now
                 </button>
               </a>
               <a
-                href="https://wa.me/917349653339"
+                href="https://wa.me/917349653339?text=Hello,%20I%20would%20like%20to%20schedule%20a%20visit%20to%20EzyElders"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-white hover:text-dark-lavender transition-all flex items-center gap-2">
+                <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-pink-600 transition-all flex items-center gap-2">
                   <MessageCircle className="w-5 h-5" />
-                  WhatsApp Us
+                  Schedule a Visit
                 </button>
               </a>
             </div>

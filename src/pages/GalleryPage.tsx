@@ -31,7 +31,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 1,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/E91E63/FFFFFF?text=Yoga+Session',
       title: 'Morning Yoga Session',
       category: 'Yoga Sessions',
       date: '2024-01-15'
@@ -39,7 +39,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 2,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1576633587382-13ddf37b1fc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/00BCD4/FFFFFF?text=Tech+Class',
       title: 'Learning Smartphones Together',
       category: 'Technology Classes',
       date: '2024-01-10'
@@ -47,7 +47,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 3,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/E91E63/FFFFFF?text=Garden+Visit',
       title: 'Garden Visit',
       category: 'Outings',
       date: '2024-01-08'
@@ -56,7 +56,7 @@ const GalleryPage: React.FC = () => {
       id: 4,
       type: 'video',
       url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      thumbnail: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      thumbnail: 'https://placehold.co/400x400/00BCD4/FFFFFF?text=Diwali+Video',
       title: 'Diwali Celebrations 2023',
       category: 'Celebrations',
       date: '2023-11-12'
@@ -64,7 +64,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 5,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1588906297062-bf21ac5e0a10?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/E91E63/FFFFFF?text=Bhajan+Session',
       title: 'Bhajan Session',
       category: 'Satsangs',
       date: '2024-01-05'
@@ -72,7 +72,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 6,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/00BCD4/FFFFFF?text=Art+Workshop',
       title: 'Art & Craft Workshop',
       category: 'Cultural Events',
       date: '2024-01-03'
@@ -80,7 +80,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 7,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1543357480-c60d40007a3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/E91E63/FFFFFF?text=Senior+Day',
       title: 'Senior Citizens Day Event',
       category: 'Celebrations',
       date: '2023-10-01'
@@ -89,7 +89,7 @@ const GalleryPage: React.FC = () => {
       id: 8,
       type: 'video',
       url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      thumbnail: 'https://images.unsplash.com/photo-1567856781003-92421777d422?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      thumbnail: 'https://placehold.co/400x400/00BCD4/FFFFFF?text=Tech+Video',
       title: 'Technology Workshop Highlights',
       category: 'Technology Classes',
       date: '2023-12-20'
@@ -97,7 +97,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 9,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/E91E63/FFFFFF?text=Chair+Yoga',
       title: 'Chair Yoga for Beginners',
       category: 'Yoga Sessions',
       date: '2023-12-15'
@@ -105,7 +105,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 10,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/00BCD4/FFFFFF?text=Community+Lunch',
       title: 'Community Lunch',
       category: 'Cultural Events',
       date: '2023-12-10'
@@ -113,7 +113,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 11,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/E91E63/FFFFFF?text=Temple+Visit',
       title: 'Temple Visit',
       category: 'Outings',
       date: '2023-12-05'
@@ -121,7 +121,7 @@ const GalleryPage: React.FC = () => {
     {
       id: 12,
       type: 'image',
-      url: 'https://images.unsplash.com/photo-1454391304352-2bf4678b1a7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+      url: 'https://placehold.co/400x400/00BCD4/FFFFFF?text=Birthday+Party',
       title: 'Birthday Celebrations',
       category: 'Celebrations',
       date: '2023-11-28'
@@ -145,48 +145,50 @@ const GalleryPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-lavender to-sky py-20">
-        <div className="section-padding">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-gray-100 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl font-bold text-gray-800 mb-6">Gallery</h1>
-            <p className="text-xl text-gray-700 leading-relaxed">
-              Explore the wonderful moments and memories created by our vibrant community of elders
+            <h1 className="text-5xl font-bold text-gray-800 mb-6">Photo & Video Gallery</h1>
+            <p className="text-xl text-gray-800 leading-relaxed">
+              Explore the wonderful moments and cherished memories created by our vibrant senior community. Every photo tells a story of joy, connection, and active living.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="py-8 bg-white border-b sticky top-[88px] z-40">
-        <div className="section-padding">
-          <div className="flex items-center gap-4 overflow-x-auto pb-2">
-            <Filter className="w-5 h-5 text-gray-600 flex-shrink-0" />
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category === 'All' ? 'all' : category)}
-                className={`px-6 py-2 rounded-full font-medium transition-all flex-shrink-0 ${
-                  (category === 'All' && selectedCategory === 'all') || selectedCategory === category
-                    ? 'bg-dark-lavender text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+      {/* Compact Category Filter */}
+      <section className="py-3 bg-white border-b sticky top-[80px] z-40 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3 overflow-x-auto">
+            <Filter className="w-4 h-4 text-gray-600 flex-shrink-0" />
+            <div className="flex gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category === 'All' ? 'all' : category)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all flex-shrink-0 text-sm ${
+                    (category === 'All' && selectedCategory === 'all') || selectedCategory === category
+                      ? 'bg-pink-600 text-white shadow-md'
+                      : 'bg-gray-100 text-gray-800 hover:shadow-md border border-gray-300'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Gallery Grid */}
       <section className="py-20 bg-gray-50">
-        <div className="section-padding">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredItems.map((item, index) => (
               <motion.div
@@ -194,14 +196,14 @@ const GalleryPage: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05 }}
-                className="relative group cursor-pointer overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all"
+                className="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg border border-gray-300 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
                 onClick={() => openLightbox(item)}
               >
                 <div className="aspect-square overflow-hidden">
                   <img
                     src={item.type === 'video' ? item.thumbnail : item.url}
                     alt={item.title}
-                    className="w-full h-full object-cover image-zoom"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                 </div>
                 
@@ -220,7 +222,7 @@ const GalleryPage: React.FC = () => {
                 {/* Video indicator */}
                 {item.type === 'video' && (
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/90 rounded-full p-4 group-hover:scale-110 transition-transform">
-                    <Play className="w-8 h-8 text-gray-800 fill-current" />
+                    <Play className="w-8 h-8 text-pink-600 fill-current" />
                   </div>
                 )}
               </motion.div>
@@ -239,7 +241,7 @@ const GalleryPage: React.FC = () => {
           onClick={closeLightbox}
         >
           <button
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
             onClick={closeLightbox}
           >
             <X className="w-8 h-8" />
@@ -285,17 +287,17 @@ const GalleryPage: React.FC = () => {
       )}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-dark-lavender to-purple-700 text-white">
-        <div className="section-padding text-center">
+      <section className="py-20 bg-gradient-to-r from-pink-600 to-cyan-500 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
           >
             <h2 className="text-4xl font-bold mb-4">Be Part of Our Story</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Join our community and create beautiful memories with fellow seniors
+              Join our vibrant senior community and create beautiful memories with fellow elders. Every day brings new opportunities for joy and connection.
             </p>
-            <button className="bg-white text-dark-lavender px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors">
+            <button className="bg-white text-pink-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
               Join EzyElders Today
             </button>
           </motion.div>
