@@ -134,7 +134,7 @@ const JoinUsPage: React.FC = () => {
       };
 
       // Save to Supabase
-      const result = await memberService.createMember(memberData);
+      const result = await memberService.create(memberData);
       
       // Set request ID from response
       setRequestId(result.requestId);
@@ -193,7 +193,7 @@ const JoinUsPage: React.FC = () => {
       };
 
       // Save to Supabase
-      const result = await volunteerService.createVolunteer(volunteerData);
+      const result = await volunteerService.create(volunteerData);
       
       // Set request ID from response
       setRequestId(result.requestId);
