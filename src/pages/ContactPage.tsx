@@ -40,7 +40,7 @@ const ContactPage: React.FC = () => {
 
     try {
       // Save to Supabase
-      const result = await contactService.createContactInquiry(formData);
+      const result = await contactService.create(formData);
       
       // Set request ID from response
       setRequestId(result.requestId);
