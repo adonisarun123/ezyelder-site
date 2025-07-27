@@ -164,6 +164,7 @@ export const getDetailedError = (error: any) => {
 export const supabaseUtils = {
   async testConnection() {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data, error } = await supabase.from('members').select('count').limit(1)
       
       if (error) {
@@ -205,6 +206,7 @@ export const supabaseUtils = {
     const results = await Promise.all(
       requiredTables.map(async (table) => {
         try {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { count, error } = await supabase
             .from(table)
             .select('*', { count: 'exact', head: true })
