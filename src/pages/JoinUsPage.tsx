@@ -43,6 +43,20 @@ const JoinUsPage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [requestId, setRequestId] = useState<string>('');
 
+  // Helper function to calculate age from date of birth
+  const calculateAge = (dateOfBirth: string): number => {
+    const dob = new Date(dateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+      age--;
+    }
+    
+    return age;
+  };
+
   const memberInterests = [
     'Health & Wellness', 'Technology Training', 'Arts & Crafts', 'Music & Dance',
     'Social Outings', 'Spiritual Activities', 'Cooking Classes', 'Games & Recreation',
@@ -116,21 +130,16 @@ const JoinUsPage: React.FC = () => {
     setErrorMessage('');
 
     try {
-      // Prepare data for Supabase (convert camelCase to snake_case)
+      // Prepare data for Supabase
       const memberData = {
-        first_name: memberForm.firstName,
-        last_name: memberForm.lastName,
+        name: `${memberForm.firstName} ${memberForm.lastName}`,
         email: memberForm.email,
         phone: memberForm.phone,
-        date_of_birth: memberForm.dateOfBirth,
-        address: memberForm.address,
-        city: memberForm.city,
-        emergency_contact: memberForm.emergencyContact,
-        emergency_phone: memberForm.emergencyPhone,
-        medical_conditions: memberForm.medicalConditions || undefined,
+        address: `${memberForm.address}, ${memberForm.city}`,
+        age: calculateAge(memberForm.dateOfBirth),
         interests: memberForm.interests,
-        membership_type: memberForm.membershipType,
-        hear_about_us: memberForm.hearAboutUs || undefined
+        emergency_contact: `${memberForm.emergencyContact} (${memberForm.emergencyPhone})`,
+        medical_conditions: memberForm.medicalConditions || undefined
       };
 
       // Save to Supabase
@@ -175,21 +184,16 @@ const JoinUsPage: React.FC = () => {
     setErrorMessage('');
 
     try {
-      // Prepare data for Supabase (convert camelCase to snake_case)
+      // Prepare data for Supabase
       const volunteerData = {
-        first_name: volunteerForm.firstName,
-        last_name: volunteerForm.lastName,
+        name: `${volunteerForm.firstName} ${volunteerForm.lastName}`,
         email: volunteerForm.email,
         phone: volunteerForm.phone,
-        address: volunteerForm.address,
-        city: volunteerForm.city,
-        occupation: volunteerForm.occupation || undefined,
+        address: `${volunteerForm.address}, ${volunteerForm.city}`,
         skills: volunteerForm.skills,
         availability: volunteerForm.availability,
-        experience: volunteerForm.experience || undefined,
-        motivation: volunteerForm.motivation,
-        preferred_area: volunteerForm.preferredArea,
-        background_check: volunteerForm.backgroundCheck
+        experience: volunteerForm.experience || '',
+        motivation: volunteerForm.motivation
       };
 
       // Save to Supabase
